@@ -1,4 +1,5 @@
 @import 'mixins';
+@import 'reset';
 @import '~@angular/material/theming';
 
 .mat-toolbar {
@@ -11,4 +12,8 @@
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+a {
+  color: #fff;
 }
