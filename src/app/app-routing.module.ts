@@ -17,6 +17,11 @@ const routes: Routes = [
     path: 'intl',
     loadChildren: () => import('./intl/intl.module').then(m => m.IntlModule)
   },
+  {
+    path: 'form',
+    pathMatch: 'full',
+    loadChildren: () => import('./form/form.module').then(m => m.FormModule)
+  },
 
 ];
 

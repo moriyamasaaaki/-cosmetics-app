@@ -1,0 +1,37 @@
+@import "mixins";
+@import "reset";
+
+.form {
+  padding: 0 8px;
+  max-width: 500px;
+  margin: 0 auto;
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: #333;
+  }
+  &__container {
+    text-align: center;
+  }
+  &__file {
+    margin: 16px auto;
+    @include tab {
+      margin: 24px auto;
+    }
+  }
+  .mat-form-field {
+    max-width: 500px;
+    display: block;
+    margin: 0 auto 16px;
+    @include tab {
+      margin: 0 auto 24px;
+    }
+  }
+  button {
+    margin: 8px;
+  }
+  p {
+    text-align: right;
+  }
+}
