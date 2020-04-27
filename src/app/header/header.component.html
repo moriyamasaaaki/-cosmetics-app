@@ -1,9 +1,28 @@
 <mat-toolbar color="primary">
   <span>
     <a routerLink="/">
-    Mens-Lab
+      Mens-Lab
     </a>
   </span>
   <span class="example-spacer"></span>
-  <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+  <button mat-raised-button aria-label="ログイン" color="accent">ログイン</button>
+  <div class="">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <img src="assets/IMG_6179.PNG" width="45" alt="" />
+    </button>
+  </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>input</mat-icon>
+      <span>ログアウト</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>マイページ</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>star</mat-icon>
+      <span>お気に入り投稿</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
