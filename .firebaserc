@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "cosmetics-app-71d70"
+  },
+  "targets": {
+    "cosmetics-app-71d70": {
+      "hosting": {
+        "cosmetics-app": [
+          "cosmetics-app-71d70"
+        ]
+      }
+    }
   }
 }
