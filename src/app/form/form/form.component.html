@@ -1,0 +1,26 @@
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+  <h1>記事作成</h1>
+  <div class="form__container">
+    <div>
+      <input type="file" aria-label="画像選択" (change)="setImage($event)" multiple />
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>タイトル</mat-label>
+      <input matInput aria-label="記事タイトル" formControlName="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>タグ</mat-label>
+      <input matInput aria-label="タグ" formControlName="tag" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>内容</mat-label>
+      <textarea matInput matTextareaAutosize aria-label="記事の内容" formControlName="article" required></textarea>
+    </mat-form-field>
+
+  </div>
+</form>
+
+<div>{{this.form.value.title}}</div>
