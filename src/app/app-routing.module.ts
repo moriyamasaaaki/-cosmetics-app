@@ -13,6 +13,10 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
   },
+  {
+    path: 'intl',
+    loadChildren: () => import('./intl/intl.module').then(m => m.IntlModule)
+  },
 
 ];
 

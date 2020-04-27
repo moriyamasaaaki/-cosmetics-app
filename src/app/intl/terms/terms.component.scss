@@ -1,0 +1,29 @@
+@import 'mixins';
+@import 'reset';
+
+.terms {
+  padding: 8px;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  color: #3d3d3d;
+  @include pc {
+    padding: 0 16px;
+  }
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+  ul {
+    margin-bottom: 24px;
+  }
+  li {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
