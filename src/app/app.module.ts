@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 @NgModule({
   declarations: [
@@ -35,11 +35,11 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     SharedModule,
     MatMenuModule,
     MatButtonModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     AngularFireFunctionsModule,
-    AngularFireAuth,
+    AngularFireAuthModule,
     AngularFireStorageModule
   ],
   providers: [
