@@ -1,19 +1,18 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="header">
   <span>
     <a routerLink="/">
       Mens-Lab
     </a>
   </span>
-  <span class="example-spacer"></span>
-  <button mat-raised-button aria-label="ログアウト" *ngIf="user$ | async" (click)="logout()" color="accent">ログアウト</button>
+  <span class="header__spacer"></span>
   <button mat-raised-button aria-label="ログイン" *ngIf="!(user$ | async)" (click)="login()">ログイン</button>
-  <div class="">
-    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user$ | async">
-      <img src="assets/IMG_6179.PNG" width="45" alt="" />
+  <div class="header__avatart">
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user$ | async as user">
+      <img [src]="user.photoURL" alt="" />
     </button>
   </div>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item *ngIf="user$ | async" (click)="logout()">
       <mat-icon>input</mat-icon>
       <span>ログアウト</span>
     </button>
