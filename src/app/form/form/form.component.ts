@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-form',
@@ -11,6 +13,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
+    private articleService: ArticleService,
   ) { }
 
   form = this.fb.group({
@@ -41,6 +45,13 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-    this.form.value;
+    this.articleService.createArticle(
+      this.authService.uid,
+      {
+        ...this.form.value,
+        liked: 0,
+      },
+      this.images
+    );
   }
 }

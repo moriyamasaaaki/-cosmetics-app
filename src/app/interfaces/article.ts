@@ -3,11 +3,13 @@ import { firestore } from 'firebase';
 
 export interface Article {
   articleId: string;
-  articleImage: string[];
+  articleImageUrls: string[];
   tag: string;
   content: string;
   createdAt: firestore.Timestamp;
+  updatedAt: firestore.Timestamp;
   liked: number;
+  userId: string;
 }
 
 export interface ArticleWithAuthor extends Article {
