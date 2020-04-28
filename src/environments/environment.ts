@@ -1,7 +1,7 @@
 
 export const environment = {
   production: false,
-  firebase: {
+  firebaseConfig: {
     apiKey: 'AIzaSyCEuBRpqApOsFK6cb5Au5uwWkpmS24vjYU',
     authDomain: 'cosmetics-app-71d70.firebaseapp.com',
     databaseURL: 'https://cosmetics-app-71d70.firebaseio.com',
