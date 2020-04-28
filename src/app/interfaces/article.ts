@@ -7,6 +7,7 @@ export interface Article {
   tag: string;
   content: string;
   createdAt: firestore.Timestamp;
+  liked: number;
 }
 
 export interface ArticleWithAuthor extends Article {
