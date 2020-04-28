@@ -4,6 +4,7 @@ import { firestore } from 'firebase';
 export interface Article {
   articleId: string;
   articleImageUrls: string[];
+  title: string;
   tag: string;
   content: string;
   createdAt: firestore.Timestamp;
