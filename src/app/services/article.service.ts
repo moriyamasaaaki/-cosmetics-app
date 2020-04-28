@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Article } from '../interfaces/article';
+import { ArticleWithAuthor, Article } from '../interfaces/article';
+import { Observable, combineLatest, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { User } from '../interfaces/user';
 import { firestore } from 'firebase';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage/';
@@ -56,5 +59,35 @@ export class ArticleService {
         articleImageUrls
       });
     });
+  }
+
+  getArticles(): Observable<ArticleWithAuthor[]> {
+    let articles: Article[];
+    return this.db.collection<Article>(`articles`).valueChanges()
+      .pipe(
+        switchMap((docs: Article[]) => {
+          articles = docs;
+          if (articles.length) {
+            const userIds: string[] = articles.filter((article, index, self) => {
+              return self.findIndex(item => article.userId === item.userId) === index;
+            }).map(article => article.userId);
+
+            return combineLatest(userIds.map(userId => {
+              return this.db.doc<User>(`users/${userId}`).valueChanges();
+            }));
+          } else {
+            return of([]);
+          }
+        }),
+        map((users: User[]) => {
+          return articles.map(article => {
+            const result: ArticleWithAuthor = {
+              ...article,
+              author: users.find(user => user.userId === article.userId),
+            };
+            return result;
+          });
+        })
+      );
   }
 }

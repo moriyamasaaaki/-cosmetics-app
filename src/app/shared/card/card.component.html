@@ -1,53 +1,16 @@
 <div class="card">
-  <mat-card class="card__list" routerLink="/article">
+  <ng-container *ngIf="articles$ | async as articles">
+  <mat-card class="card__list" routerLink="/article" *ngFor="let article of articles">
     <mat-card-header>
-      <img src="assets/IMG_6179.PNG" mat-card-avatar width="48" alt="">
-      <mat-card-title>美容のタイトル</mat-card-title>
-      <mat-card-subtitle>Masaaki Moriya</mat-card-subtitle>
+      <img [src]="article.author.avatorImage" mat-card-avatar width="48" alt="">
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <mat-card-subtitle>{{article.author.userName}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="assets/cosme.2.jpg" alt="">
+    <img mat-card-image [src]="article.articleImageUrls[0]" alt="">
     <mat-card-footer>
-      <p>2週間前</p>
+      <p>{{ article.createdAt.toDate() | date: 'yyy/MM/dd' }}</p>
       <mat-icon aria-hidden="false" aria-label="お気に入り">favorite_border</mat-icon>
     </mat-card-footer>
   </mat-card>
-
-  <mat-card class="card__list" routerLink="/article">
-    <mat-card-header>
-      <img src="assets/IMG_6179.PNG" mat-card-avatar width="48" alt="">
-      <mat-card-title>美容のタイトル</mat-card-title>
-      <mat-card-subtitle>Masaaki Moriya</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="assets/cosme.2.jpg" alt="">
-    <mat-card-footer>
-      <p>2週間前</p>
-      <mat-icon aria-hidden="false" aria-label="お気に入り">favorite_border</mat-icon>
-    </mat-card-footer>
-  </mat-card>
-
-  <mat-card class="card__list" routerLink="/article">
-    <mat-card-header>
-      <img src="assets/IMG_6179.PNG" mat-card-avatar width="48" alt="">
-      <mat-card-title>美容のタイトル</mat-card-title>
-      <mat-card-subtitle>Masaaki Moriya</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="assets/cosme.2.jpg" alt="">
-    <mat-card-footer>
-      <p>2週間前</p>
-      <mat-icon aria-hidden="false" aria-label="お気に入り">favorite_border</mat-icon>
-    </mat-card-footer>
-  </mat-card>
-
-  <mat-card class="card__list" routerLink="/article">
-    <mat-card-header>
-      <img src="assets/IMG_6179.PNG" mat-card-avatar width="48" alt="">
-      <mat-card-title>美容のタイトル</mat-card-title>
-      <mat-card-subtitle>Masaaki Moriya</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="assets/cosme.2.jpg" alt="">
-    <mat-card-footer>
-      <p>2週間前</p>
-      <mat-icon aria-hidden="false" aria-label="お気に入り">favorite_border</mat-icon>
-    </mat-card-footer>
-  </mat-card>
+  </ng-container>
 </div>
