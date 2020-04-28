@@ -5,9 +5,10 @@
     </a>
   </span>
   <span class="example-spacer"></span>
-  <button mat-raised-button aria-label="ログイン" (click)="login()" color="accent">ログイン</button>
+  <button mat-raised-button aria-label="ログアウト" *ngIf="user$ | async" (click)="logout()" color="accent">ログアウト</button>
+  <button mat-raised-button aria-label="ログイン" *ngIf="!(user$ | async)" (click)="login()">ログイン</button>
   <div class="">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user$ | async">
       <img src="assets/IMG_6179.PNG" width="45" alt="" />
     </button>
   </div>
