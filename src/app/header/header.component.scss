@@ -1,19 +1,20 @@
-@import 'mixins';
-@import 'reset';
-@import '~@angular/material/theming';
+@import "mixins";
+@import "reset";
+@import "~@angular/material/theming";
 
-.mat-toolbar {
+.header {
   @include mat-elevation(4);
-}
-
-.example-icon {
-  padding: 0 14px;
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-a {
-  color: #fff;
+  &__spacer {
+    flex: 1 1 auto;
+  }
+  a {
+    color: #fff;
+  }
+  &__avatart {
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+  }
 }
