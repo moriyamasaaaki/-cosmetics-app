@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -20,6 +21,8 @@ const routes: Routes = [
   {
     path: 'form',
     pathMatch: 'full',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () => import('./form/form.module').then(m => m.FormModule)
   },
 
