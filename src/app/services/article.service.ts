@@ -16,9 +16,10 @@ export class ArticleService {
     private storage: AngularFireStorage,
   ) { }
 
-  createArticle(userId: string, article: Article, images?: string[]) {
+  createArticle(userId: string, article: Article, images?: File[]) {
     const articleId = this.db.createId();
     this.db.doc(`articles/${articleId}`).set({
+      userId,
       articleId,
       ...article,
       createdAt: firestore.Timestamp.now(),
@@ -26,7 +27,7 @@ export class ArticleService {
     })
       .then(() => {
         if (images) {
-          this.uploadImages(images, userId);
+          this.uploadImages(images, articleId);
         }
         this.snackBar.open('記事を作成しました！', null, {
           duration: 2000
@@ -40,7 +41,7 @@ export class ArticleService {
       });
   }
 
-  uploadImages(files: string[], articleId: string): Promise<void> {
+  uploadImages(files: File[], articleId: string): Promise<void> {
     return Promise.all(
       files.map((file, index) => {
         const ref = this.storage.ref(`articles/${articleId}-${index}`);

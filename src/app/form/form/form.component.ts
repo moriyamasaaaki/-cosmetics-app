@@ -9,7 +9,7 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  images: string[];
+  images: File[];
 
   constructor(
     private fb: FormBuilder,
