@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -22,11 +23,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { DialogComponent } from './dialog/dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     MatButtonModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
@@ -49,6 +53,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' }
   ],
+  entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

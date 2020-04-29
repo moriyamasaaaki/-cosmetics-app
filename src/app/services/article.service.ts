@@ -148,4 +148,16 @@ export class ArticleService {
   getForm(artcleId: string) {
     return this.db.doc<Article>(`articles/${artcleId}`).valueChanges();
   }
+
+  deleteArticle(articleId: string): Promise<void> {
+    return this.db
+    .doc<Article>(`articles/${articleId}`)
+    .delete()
+    .then(() => {
+      this.router.navigateByUrl('/');
+      this.snackBar.open('削除しました', null, {
+        duration: 2000
+      });
+    });
+  }
 }
