@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ArticleWithAuthor, Article } from '../interfaces/article';
 import { Observable, combineLatest, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, take, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { firestore } from 'firebase';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -87,6 +87,36 @@ export class ArticleService {
             };
             return result;
           });
+        })
+      );
+  }
+
+  getArticle(articleId: string): Observable<ArticleWithAuthor> {
+    let result: ArticleWithAuthor;
+    let article: Article;
+    let author: User;
+    return this.db.doc<Article>(`articles/${articleId}`)
+      .valueChanges()
+      .pipe(
+        take(1),
+        tap(doc => {
+          article = doc;
+        }),
+        switchMap(() => {
+          return this.db.doc<User>(`users/${article.userId}`)
+            .valueChanges()
+            .pipe(
+              tap(user => {
+                author = user;
+              })
+            );
+        }),
+        map(() => {
+          result = {
+            ...article,
+            author
+          };
+          return result;
         })
       );
   }
