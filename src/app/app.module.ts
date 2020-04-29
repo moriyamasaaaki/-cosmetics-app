@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -37,6 +38,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     MatMenuModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatTooltipModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
