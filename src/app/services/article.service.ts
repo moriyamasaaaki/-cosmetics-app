@@ -7,6 +7,7 @@ import { User } from '../interfaces/user';
 import { firestore } from 'firebase';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/storage/';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class ArticleService {
     private db: AngularFirestore,
     private snackBar: MatSnackBar,
     private storage: AngularFireStorage,
+    private router: Router,
   ) { }
 
   createArticle(userId: string, article: Article, images?: File[]) {
@@ -32,6 +34,7 @@ export class ArticleService {
         if (images) {
           this.uploadImages(images, articleId);
         }
+        this.router.navigateByUrl(`/article/${articleId}`);
         this.snackBar.open('記事を作成しました！', null, {
           duration: 2000
         });
@@ -39,6 +42,27 @@ export class ArticleService {
       .catch(e => {
         console.log(e);
         this.snackBar.open('記事を作成できませんでした。', null, {
+          duration: 2000
+        });
+      });
+  }
+
+  updateArticle(userId: string, article: Article, articleId: string, images?: File[]): Promise<void> {
+    return this.db.doc(`articles/${articleId}`).update({
+      ...article, articleId, updatedAt: firestore.Timestamp.now()
+    })
+    .then(() => {
+      if (images) {
+        this.uploadImages(images, articleId);
+      }
+      this.router.navigateByUrl(`/article/${articleId}`);
+      this.snackBar.open('記事を更新しました！', null, {
+        duration: 2000
+      });
+    })
+      .catch(e => {
+        console.log(e);
+        this.snackBar.open('記事を更新できませんでした。', null, {
           duration: 2000
         });
       });
@@ -119,5 +143,9 @@ export class ArticleService {
           return result;
         })
       );
+  }
+
+  getForm(artcleId: string) {
+    return this.db.doc<Article>(`articles/${artcleId}`).valueChanges();
   }
 }
