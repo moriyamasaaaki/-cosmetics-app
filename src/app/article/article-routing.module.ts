@@ -6,9 +6,12 @@ import { ArticleComponent } from './article/article.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: ArticleComponent
-  }
+  },
+  {
+    path: ':articleId',
+    component: ArticleComponent
+  },
 ];
 
 @NgModule({
