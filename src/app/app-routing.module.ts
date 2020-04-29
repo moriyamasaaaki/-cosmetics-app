@@ -24,6 +24,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./form/form.module').then(m => m.FormModule)
   },
+  {
+    path: 'favorite',
+    loadChildren: () => import('./favorite/favorite.module').then(m => m.FavoriteModule),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+
 
 ];
 
