@@ -11,7 +11,6 @@ const routes: Routes = [
   },
   {
     path: 'article',
-    pathMatch: 'full',
     loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
   },
   {
