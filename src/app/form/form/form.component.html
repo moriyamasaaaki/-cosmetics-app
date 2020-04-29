@@ -19,12 +19,19 @@
 
     <mat-form-field appearance="fill">
       <mat-label>内容</mat-label>
-      <textarea matInput matTextareaAutosize aria-label="記事の内容" formControlName="article" required></textarea>
-      <mat-error *ngIf="articleControl.hasError('required')">必須入力です</mat-error>
-      <mat-error *ngIf="articleControl.hasError('maxlength')">500文字以内にしてください。</mat-error>
+      <textarea matInput matTextareaAutosize aria-label="記事の内容" formControlName="content" required></textarea>
+      <mat-error *ngIf="contentControl.hasError('required')">必須入力です</mat-error>
+      <mat-error *ngIf="contentControl.hasError('maxlength')">500文字以内にしてください。</mat-error>
     </mat-form-field>
-    <p>{{this.form.value.article.length }}/500</p>
-    <button mat-raised-button aria-label="記事作成" color="primary" [disabled]="form.invalid || form.pristine">投稿する</button>
-    <button mat-raised-button color="warn" [disabled]="form.invalid">リセット</button>
+    <p>{{this.form.value.content.length }}/500</p>
+    <ng-container *ngIf="edit; else create">
+      <button mat-raised-button aria-label="記事編集" color="primary" [disabled]="form.invalid || form.pristine" (click)="updateForm()">更新する</button>
+      <button mat-raised-button color="warn" [disabled]="form.invalid">リセット</button>
+    </ng-container>
+    <ng-template #create>
+      <button mat-raised-button aria-label="記事作成" color="primary"
+        [disabled]="form.invalid || form.pristine">投稿する</button>
+      <button mat-raised-button color="warn" [disabled]="form.invalid">リセット</button>
+    </ng-template>
   </div>
 </form>
