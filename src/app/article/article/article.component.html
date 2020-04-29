@@ -10,11 +10,11 @@
     </button>
   </div>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item [routerLink]="['/form']" [queryParams]="{ articleId: article.articleId }" aria-label="編集する">
       <mat-icon>create</mat-icon>
       <span>編集</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item aria-label="削除する">
       <mat-icon>delete_sweep</mat-icon>
       <span>削除</span>
     </button>
