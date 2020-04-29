@@ -5,6 +5,9 @@
     </a>
   </span>
   <span class="header__spacer"></span>
+  <button mat-icon-button aria-label="記事作成" matTooltip="記事作成" routerLink="/form">
+    <mat-icon>note_add</mat-icon>
+  </button>
   <button mat-raised-button aria-label="ログイン" *ngIf="!(user$ | async)" (click)="login()">ログイン</button>
   <div class="header__avatart">
     <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user$ | async as user">
