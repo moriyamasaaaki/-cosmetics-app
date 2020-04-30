@@ -1,3 +1,11 @@
 @import "mixins";
 @import "reset";
 
+.container {
+  display: flex;
+  flex-flow: column;
+  min-height: 100%;
+}
+.content {
+  flex: 1;
+}
