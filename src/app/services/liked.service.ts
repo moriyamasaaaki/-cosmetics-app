@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Article } from '../interfaces/article';
+import { Article, ArticleWithAuthor } from '../interfaces/article';
 import { Favorite } from '../interfaces/article';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class LikedService {
 
   // 自分がいいねしている記事を一覧で取得する
   getLikedList(userId: string) {
-    return this.db.collection<Favorite>(`likedusers/${userId}/likedItems`).valueChanges().pipe(
+    return this.db.collection<Favorite>(`likedUserIds/${userId}/likeItems`).valueChanges().pipe(
       switchMap(likeArticles => {
         return combineLatest(
           likeArticles.map(likeArticle => this.db.doc<Article>(`articles/${likeArticle.articleId}`).valueChanges())
