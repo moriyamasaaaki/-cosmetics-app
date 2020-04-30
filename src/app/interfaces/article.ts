@@ -16,3 +16,10 @@ export interface Article {
 export interface ArticleWithAuthor extends Article {
   author: User;
 }
+
+export interface Favorite {
+  userId: string;
+  articleId: string;
+  liked: number;
+}
+

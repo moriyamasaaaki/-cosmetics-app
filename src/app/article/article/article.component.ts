@@ -3,8 +3,10 @@ import { ArticleService } from 'src/app/services/article.service';
 import { ArticleWithAuthor } from 'src/app/interfaces/article';
 import { take } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { LikedService } from 'src/app/services/liked.service';
 
 @Component({
   selector: 'app-article',
@@ -14,29 +16,33 @@ import { DialogComponent } from 'src/app/dialog/dialog.component';
 export class ArticleComponent implements OnInit {
 
   article: ArticleWithAuthor;
+  isLike: boolean;
+  likedCount: number;
 
   constructor(
     private articleService: ArticleService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private authService: AuthService,
+    private likedService: LikedService,
+    private snackbar: MatSnackBar,
   ) {
     this.getArticle();
   }
 
   ngOnInit() {
-    this.getArticle();
+    this.getLiked();
   }
 
   getArticle() {
     const articleId = this.route.snapshot.paramMap.get('articleId');
     this.articleService.getArticle(articleId)
-    .pipe(
-      take(2),
-    )
-    .subscribe(article => {
-      this.article = article;
-      console.log(this.article);
-    });
+      .pipe(
+        take(2),
+      )
+      .subscribe(article => {
+        this.article = article;
+      });
   }
 
   delte() {
@@ -61,4 +67,50 @@ export class ArticleComponent implements OnInit {
     });
   }
 
+  getLiked() {
+    const auth = this.authService.uid;
+    this.route.paramMap.subscribe(params => {
+      this.articleService.getArticle(params.get('articleId'))
+      .pipe(take(1))
+      .subscribe(articleData => {
+        const likedId = articleData.articleId;
+        this.likedCount = articleData.liked;
+        if (this.authService.uid) {
+          this.likedService.checkisLiked(likedId, this.authService.uid)
+          .pipe(take(1))
+          .subscribe(doc => {
+            this.isLike = doc;
+          });
+        }
+      });
+    });
+  }
+
+  toggleLiked() {
+    this.route.paramMap.subscribe(params => {
+      const auth = this.authService.uid;
+      const paramId = params.get('articleId');
+      if (auth && !this.isLike) {
+        this.isLike = true;
+        this.likedCount++;
+        this.likedService.likeArticle(paramId, auth);
+        this.snackbar.open('お気に入りに追加しました', null, {
+          duration: 2000
+        });
+      } else if (auth && this.isLike) {
+        this.isLike = false;
+        this.likedCount--;
+        this.likedService.unLike(paramId, auth);
+        this.snackbar.open('お気に入り削除しました。', null, {
+          duration: 2000
+        });
+      } else if (!auth) {
+        this.snackbar.open('いいねできません。ログインしてください⚠️', null, {
+          duration: 2000
+        });
+      }
+    });
+  }
+
 }
+
