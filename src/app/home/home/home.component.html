@@ -4,11 +4,18 @@
   <h2>人気の記事</h2>
   <button mat-button color="primary" aria-label="もっとみる" routerLink="/list">もっとみる</button>
 </div>
-<app-card></app-card>
+<ng-container *ngIf="articles$ | async as articles">
+<div class="card">
+<app-card *ngFor="let article of articles" [article]="article"></app-card>
+</div>
+</ng-container>
 <div class="top__popular-head">
   <h2>おすすめの記事</h2>
   <button mat-button color="primary" aria-label="もっとみる" routerLink="/list">もっとみる</button>
 </div>
-<app-card></app-card>
-
+<div class="card">
+<ng-container *ngIf="articles$ | async as articles">
+  <app-card *ngFor="let article of articles" [article]="article"></app-card>
+</ng-container>
+</div>
 </div>
