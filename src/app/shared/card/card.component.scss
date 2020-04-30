@@ -1,34 +1,26 @@
-@import 'mixins';
-@import '~@angular/material/theming';
+@import "mixins";
+@import "~@angular/material/theming";
 
-.card {
-  padding: 0 8px;
-    @include tab {
-    display: grid;
-    justify-content: center;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fill, 340px);
-    margin: 0 auto 80px;
-  }
-  &__list {
-    box-sizing: border-box;
-    background-color: #fff;
-    color: #3d3d3d;
-    margin: 16px 0;
-    @include mat-elevation(3);
-  }
-  .mat-card-title {
-    font-weight: 600;
-  }
-  .mat-card-subtitle, p {
-    color: gray;
-  }
-  .mat-card-footer {
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.mat-card {
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #3d3d3d;
+  margin: 16px 0;
+  padding: 24px 16px 40px;
+  @include mat-elevation(3);
+}
+.mat-card-title {
+  font-weight: 600;
+}
+.mat-card-subtitle,
+p {
+  color: gray;
+}
+.mat-card-footer {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .isLike {
