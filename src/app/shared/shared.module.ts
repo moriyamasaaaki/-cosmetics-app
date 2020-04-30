@@ -6,13 +6,15 @@ import { CardComponent } from './card/card.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [CardComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   exports: [
     CardComponent
