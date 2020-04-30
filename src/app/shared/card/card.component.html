@@ -1,6 +1,4 @@
-<div class="card">
-  <ng-container *ngIf="articles$ | async as articles">
-    <mat-card class="card__list" routerLink="/article/{{ article.articleId }}" *ngFor="let article of articles">
+    <mat-card routerLink="/article/{{ article.articleId }}">
       <mat-card-header>
         <img [src]="article.author.avatorImage" mat-card-avatar width="48" alt="">
         <mat-card-title>{{article.title}}</mat-card-title>
@@ -12,5 +10,3 @@
         <p>いいね{{ article.liked }}❤️</p>
       </mat-card-footer>
     </mat-card>
-  </ng-container>
-</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ArticleWithAuthor } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
@@ -18,7 +18,8 @@ export class CardComponent implements OnInit {
   isLike: boolean;
   articleId: string;
   articles$: Observable<ArticleWithAuthor[]> = this.aritcleService.getArticles().pipe(take(1));
-  article: ArticleWithAuthor;
+  // article: ArticleWithAuthor;
+  @Input() article: ArticleWithAuthor;
 
   constructor(
     private aritcleService: ArticleService,
