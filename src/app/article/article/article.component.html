@@ -27,6 +27,21 @@
   </div>
   <div class="article__footer">
     <span>投稿日：{{ article.createdAt.toDate() | date: 'yyy/MM/dd' }}</span>
-    <mat-icon aria-hidden="false" aria-label="お気に入り">favorite_border</mat-icon>
+    <ng-container *ngIf="isLike; else noLike">
+      <div class="article__icon">
+        <button mat-icon-button color="warn" aria-label="お気に入り" (click)="toggleLiked()" [class.isLike]="isLike">
+          <mat-icon>favorite</mat-icon>
+          <span>{{likedCount}}</span>
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #noLike>
+      <div class="article__icon">
+        <button mat-icon-button aria-label="お気に入り" (click)="toggleLiked()" [class.isLike]="isLike">
+          <mat-icon>favorite_border</mat-icon>
+          <span>{{likedCount}}</span>
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>

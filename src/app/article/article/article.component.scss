@@ -1,4 +1,4 @@
-@import 'mixins';
+@import "mixins";
 
 .article {
   max-width: 900px;
@@ -59,6 +59,13 @@
       }
     }
   }
+  &__icon {
+    button {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+  }
   &__footer {
     display: flex;
     justify-content: space-between;
@@ -69,7 +76,12 @@
       font-size: 13px;
     }
     .mat-icon {
-      font-size: 40px;
+      font-size: 30px;
+      margin-right: 8px;
     }
   }
+}
+
+.isLike {
+  color: red;
 }
