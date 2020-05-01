@@ -1,12 +1,17 @@
-    <mat-card routerLink="/article/{{ article.articleId }}">
-      <mat-card-header>
-        <img [src]="article.author.avatorImage" mat-card-avatar width="48" alt="">
-        <mat-card-title>{{article.title}}</mat-card-title>
-        <mat-card-subtitle>{{article.author.userName}}</mat-card-subtitle>
-      </mat-card-header>
-      <figure mat-card-image [style.background-image]="'url(' + article.articleImageUrls[0] + ')'"></figure>
-      <mat-card-footer>
-        <p>{{ article.createdAt.toDate() | date: 'yyy/MM/dd' }}</p>
-        <p>いいね{{ article.liked }}❤️</p>
-      </mat-card-footer>
-    </mat-card>
+<mat-card routerLink="/article/{{ article.articleId }}">
+  <mat-card-header>
+    <img [src]="article.author.avatorImage" mat-card-avatar width="48" alt="">
+    <mat-card-title>{{article.title}}</mat-card-title>
+    <mat-card-subtitle>{{article.author.userName}}</mat-card-subtitle>
+  </mat-card-header>
+  <ng-container *ngIf="article.articleImageUrls; else defaultImage">
+    <figure mat-card-image [style.background-image]="'url(' + article.articleImageUrls[0] + ')'"></figure>
+  </ng-container>
+  <ng-template #defaultImage>
+    <figure mat-card-image class="defaultImage"></figure>
+  </ng-template>
+  <mat-card-footer>
+    <p>{{ article.createdAt.toDate() | date: 'yyy/MM/dd' }}</p>
+    <p>いいね{{ article.liked }}❤️</p>
+  </mat-card-footer>
+</mat-card>
