@@ -51,15 +51,15 @@ export class ArticleService {
     return this.db.doc(`articles/${articleId}`).update({
       ...article, articleId, updatedAt: firestore.Timestamp.now()
     })
-    .then(() => {
-      if (images) {
-        this.uploadImages(images, articleId);
-      }
-      this.router.navigateByUrl(`/article/${articleId}`);
-      this.snackBar.open('記事を更新しました！', null, {
-        duration: 2000
-      });
-    })
+      .then(() => {
+        if (images) {
+          this.uploadImages(images, articleId);
+        }
+        this.router.navigateByUrl(`/article/${articleId}`);
+        this.snackBar.open('記事を更新しました！', null, {
+          duration: 2000
+        });
+      })
       .catch(e => {
         console.log(e);
         this.snackBar.open('記事を更新できませんでした。', null, {
@@ -145,19 +145,86 @@ export class ArticleService {
       );
   }
 
+  getpopularArticle(): Observable<ArticleWithAuthor[]> {
+    let articles: Article[];
+    return this.db.collection<Article>(`articles`, ref => {
+      return ref.orderBy('liked', 'desc')
+        .limit(4);
+    }).valueChanges()
+      .pipe(
+        switchMap((docs: Article[]) => {
+          articles = docs;
+          if (articles.length) {
+            const userIds: string[] = articles.filter((article, index, self) => {
+              return self.findIndex(item => article.userId === item.userId) === index;
+            }).map(article => article.userId);
+
+            return combineLatest(userIds.map(userId => {
+              return this.db.doc<User>(`users/${userId}`).valueChanges();
+            }));
+          } else {
+            return of([]);
+          }
+        }),
+        map((users: User[]) => {
+          return articles.map(article => {
+            const result: ArticleWithAuthor = {
+              ...article,
+              author: users.find(user => user.userId === article.userId),
+            };
+            return result;
+          });
+        })
+      );
+  }
+
+  getNewArticle(): Observable<ArticleWithAuthor[]> {
+    let articles: Article[];
+    return this.db.collection<Article>(`articles`, ref => {
+      return ref.orderBy('updatedAt', 'desc')
+        .limit(4);
+    }).valueChanges()
+      .pipe(
+        switchMap((docs: Article[]) => {
+          articles = docs;
+          if (articles.length) {
+            const userIds: string[] = articles.filter((article, index, self) => {
+              return self.findIndex(item => article.userId === item.userId) === index;
+            }).map(article => article.userId);
+
+            return combineLatest(userIds.map(userId => {
+              return this.db.doc<User>(`users/${userId}`).valueChanges();
+            }));
+          } else {
+            return of([]);
+          }
+        }),
+        map((users: User[]) => {
+          return articles.map(article => {
+            const result: ArticleWithAuthor = {
+              ...article,
+              author: users.find(user => user.userId === article.userId),
+            };
+            return result;
+          });
+        })
+      );
+  }
+
+
   getForm(artcleId: string) {
     return this.db.doc<Article>(`articles/${artcleId}`).valueChanges();
   }
 
   deleteArticle(articleId: string): Promise<void> {
     return this.db
-    .doc<Article>(`articles/${articleId}`)
-    .delete()
-    .then(() => {
-      this.router.navigateByUrl('/');
-      this.snackBar.open('削除しました', null, {
-        duration: 2000
+      .doc<Article>(`articles/${articleId}`)
+      .delete()
+      .then(() => {
+        this.router.navigateByUrl('/');
+        this.snackBar.open('削除しました', null, {
+          duration: 2000
+        });
       });
-    });
   }
 }
