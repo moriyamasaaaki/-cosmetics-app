@@ -25,9 +25,14 @@ p {
   align-items: center;
 }
 
-.mat-card-image {
+.mat-card-image,
+.defaultImage {
   height: 200px;
   background: center / cover;
+}
+
+.defaultImage {
+  background-image: url("../.././../assets/cosme.jpg");
 }
 
 .isLike {
