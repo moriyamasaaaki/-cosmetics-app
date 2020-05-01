@@ -4,6 +4,8 @@
 .mat-card {
   box-sizing: border-box;
   background-color: #fff;
+  display: flex;
+  flex-flow: column;
   color: #3d3d3d;
   margin: 16px 0;
   padding: 24px 16px 40px;
@@ -21,6 +23,11 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.mat-card-image {
+  height: 200px;
+  background: center / cover;
 }
 
 .isLike {
