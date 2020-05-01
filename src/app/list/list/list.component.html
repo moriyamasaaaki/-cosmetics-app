@@ -1,4 +1,11 @@
 <div class="list">
   <h1>記事一覧</h1>
-  <app-card></app-card>
+  <ng-container *ngIf="allArticles$ | async as allArticles; else notArticle">
+    <div class="card">
+      <app-card *ngFor="let allArticle of allArticles" [article]="allArticle"></app-card>
+    </div>
+  </ng-container>
+  <ng-template #notArticle>
+    <p>記事はまだありません。</p>
+  </ng-template>
 </div>
