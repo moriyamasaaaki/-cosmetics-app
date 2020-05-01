@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ArticleService } from 'src/app/services/article.service';
 import { ArticleWithAuthor } from 'src/app/interfaces/article';
 import { take } from 'rxjs/operators';
@@ -13,11 +13,12 @@ import { LikedService } from 'src/app/services/liked.service';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, DoCheck {
 
   article: ArticleWithAuthor;
   isLike: boolean;
   likedCount: number;
+  contributor: boolean;
 
   constructor(
     private articleService: ArticleService,
@@ -33,6 +34,12 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
     this.getLiked();
   }
+
+  ngDoCheck() {
+    this.checkContributor();
+  }
+
+
 
   getArticle() {
     const articleId = this.route.snapshot.paramMap.get('articleId');
@@ -109,6 +116,21 @@ export class ArticleComponent implements OnInit {
           duration: 2000
         });
       }
+    });
+  }
+
+  checkContributor(): void {
+    this.route.paramMap.subscribe(params => {
+      const authId = this.authService.uid;
+      const articleId = params.get('articleId');
+      this.articleService.getArticle(articleId).subscribe(article => {
+        const userId = article.userId;
+        if (userId === authId) {
+          this.contributor = true;
+        } else if (userId !== authId) {
+          this.contributor = false;
+        }
+      });
     });
   }
 
