@@ -1,0 +1,12 @@
+<div class="mypage">
+  <h1>マイページ</h1>
+  <div class="mypage__card" *ngIf="user$ | async as user">
+    <img [src]="user.photoURL" width="80" alt="">
+    <h2>{{ user.displayName }}</h2>
+  </div>
+  <ng-container *ngIf="myArticles$ | async as myArticles">
+    <div class="card">
+      <app-card *ngFor="let myArticle of myArticles" [article]="myArticle"></app-card>
+    </div>
+  </ng-container>
+</div>
