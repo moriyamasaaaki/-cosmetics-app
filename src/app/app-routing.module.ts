@@ -23,7 +23,6 @@ const routes: Routes = [
     pathMatch: 'full',
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
-    canDeactivate: [FormGuard],
     loadChildren: () => import('./form/form.module').then(m => m.FormModule)
   },
   {
