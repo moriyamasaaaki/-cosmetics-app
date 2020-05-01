@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isSearch: boolean;
   user$ = this.authService.afUser$;
 
   constructor(
@@ -22,6 +23,14 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  search() {
+    if (this.isSearch) {
+      this.isSearch = false;
+    } else if (!this.isSearch) {
+      this.isSearch = true;
+    }
   }
 
 }
