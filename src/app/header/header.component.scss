@@ -3,12 +3,19 @@
 @import "~@angular/material/theming";
 
 .header {
-  @include mat-elevation(4);
+  background-color: #fff;
+  @include mat-elevation(2);
   &__spacer {
     flex: 1 1 auto;
   }
   a {
-    color: #fff;
+    color: #000;
+    font-weight: 900;
+    font-size: 18px;
+    font-family: serif;
+    @include tab {
+    font-size: 26px;
+    }
   }
   &__avatart {
     img {

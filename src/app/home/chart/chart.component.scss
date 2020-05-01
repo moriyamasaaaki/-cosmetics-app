@@ -2,6 +2,7 @@
 @import "reset";
 
 .chart-wrapper {
+  padding: 0 8px;
   margin: 0 auto 80px;
   max-width: 1000px;
   @include tab {
@@ -13,5 +14,6 @@
   }
   canvas {
     max-width: 500px;
+    margin-bottom: 32px;
   }
 }

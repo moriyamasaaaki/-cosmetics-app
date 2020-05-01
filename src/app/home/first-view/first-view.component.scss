@@ -22,12 +22,13 @@ img {
     width: 100%;
     text-align: center;
     margin: 0 auto;
-    top: 33%;
+    top: 36%;
     bottom: 50%;
-    font-size: 24px;
+    font-size: 27px;
     color: #fff;
     font-weight: 600;
     @include pc {
+      top: 33%;
       font-size: 48px;
     }
   }
@@ -38,7 +39,7 @@ img {
     margin: 0 auto;
     top: 45%;
     bottom: 50%;
-    font-size: 24px;
+    font-size: 27px;
     color: #fff;
     font-weight: 600;
     @include pc {
