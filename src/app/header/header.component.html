@@ -5,7 +5,10 @@
     </a>
   </span>
   <span class="header__spacer"></span>
-  <button mat-icon-button aria-label="記事作成" matTooltip="記事作成" routerLink="/form">
+  <button mat-icon-button aria-label="検索する" matTooltip="検索する">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="記事作成" matTooltip="記事作成" routerLink="/form" *ngIf="user$ | async">
     <mat-icon>note_add</mat-icon>
   </button>
   <button mat-raised-button aria-label="ログイン" *ngIf="!(user$ | async)" (click)="login()">ログイン</button>
