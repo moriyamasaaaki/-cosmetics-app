@@ -10,7 +10,8 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  articles$: Observable<ArticleWithAuthor[]> = this.aritcleService.getArticles().pipe(take(1));
+  popularArticles$: Observable<ArticleWithAuthor[]> = this.aritcleService.getpopularArticle().pipe(take(1));
+  newArticles$: Observable<ArticleWithAuthor[]> = this.aritcleService.getNewArticle().pipe(take(1));
 
   constructor(
     private aritcleService: ArticleService,
