@@ -14,7 +14,7 @@
     font-size: 18px;
     font-family: serif;
     @include tab {
-    font-size: 26px;
+      font-size: 26px;
     }
   }
   &__avatart {
@@ -23,5 +23,22 @@
       height: 45px;
       border-radius: 50%;
     }
+  }
+  &__search {
+    display: none;
+  }
+}
+
+.isSearch {
+  display: block;
+  text-align: center;
+  width: 100%;
+  z-index: 999;
+}
+
+.mat-form-field {
+  background-color: #fff;
+  @include tab {
+    width: 60%;
   }
 }

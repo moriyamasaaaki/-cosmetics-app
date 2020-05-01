@@ -4,8 +4,16 @@
       Men's-ClearLab
     </a>
   </span>
+  <ng-container *ngIf="isSearch">
+    <div class="header__search" [class.isSearch]="isSearch">
+      <mat-form-field appearance="fill">
+        <mat-label>検索</mat-label>
+        <input matInput placeholder="コスメ">
+      </mat-form-field>
+    </div>
+  </ng-container>
   <span class="header__spacer"></span>
-  <button mat-icon-button aria-label="検索する" matTooltip="検索する">
+  <button mat-icon-button aria-label="検索する" matTooltip="検索する" (click)="search()">
     <mat-icon>search</mat-icon>
   </button>
   <button mat-icon-button aria-label="記事作成" matTooltip="記事作成" routerLink="/form" *ngIf="user$ | async">
