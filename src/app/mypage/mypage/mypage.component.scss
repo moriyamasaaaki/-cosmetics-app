@@ -30,4 +30,12 @@
       font-size: 22px;
     }
   }
+  p {
+    font-size: 18px;
+    text-align: center;
+    margin: 24px 0;
+    @include pc {
+      font-size: 22px;
+    }
+  }
 }
