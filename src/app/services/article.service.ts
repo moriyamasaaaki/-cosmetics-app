@@ -211,6 +211,38 @@ export class ArticleService {
       );
   }
 
+  getMyArticles(uid: string): Observable<ArticleWithAuthor[]> {
+    let articles: Article[];
+    return this.db.collection<Article>(`articles`, ref => {
+      return ref.where('userId', '==', uid);
+    }).valueChanges()
+      .pipe(
+        switchMap((docs: Article[]) => {
+          articles = docs;
+          if (articles.length) {
+            const userIds: string[] = articles.filter((article, index, self) => {
+              return self.findIndex(item => article.userId === item.userId) === index;
+            }).map(article => article.userId);
+
+            return combineLatest(userIds.map(userId => {
+              return this.db.doc<User>(`users/${userId}`).valueChanges();
+            }));
+          } else {
+            return of([]);
+          }
+        }),
+        map((users: User[]) => {
+          return articles.map(article => {
+            const result: ArticleWithAuthor = {
+              ...article,
+              author: users.find(user => user.userId === article.userId),
+            };
+            return result;
+          });
+        })
+      );
+  }
+
 
   getForm(artcleId: string) {
     return this.db.doc<Article>(`articles/${artcleId}`).valueChanges();
