@@ -8,6 +8,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    data: {
+      title: "Men's-ClearLab",
+      description: '男性美容の知識やおすすめアイテムなどを共有するサービスです。'
+    },
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
@@ -21,26 +25,41 @@ const routes: Routes = [
   {
     path: 'form',
     pathMatch: 'full',
+    data: {
+      title: '記事作成'
+    },
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     loadChildren: () => import('./form/form.module').then(m => m.FormModule)
   },
   {
     path: 'favorite',
+    data: {
+      title: 'お気に入りした記事'
+    },
     loadChildren: () => import('./favorite/favorite.module').then(m => m.FavoriteModule),
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
   {
     path: 'list',
+    data: {
+      title: '記事一覧'
+    },
     loadChildren: () => import('./list/list.module').then(m => m.ListModule),
   },
   {
     path: 'mypage',
+    data: {
+      title: 'マイページ'
+    },
     loadChildren: () => import('./mypage/mypage.module').then(m => m.MypageModule),
   },
   {
     path: 'contact',
+    data: {
+      title: 'お問い合わせ'
+    },
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
   },
 

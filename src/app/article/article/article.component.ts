@@ -7,6 +7,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { LikedService } from 'src/app/services/liked.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article',
@@ -27,17 +28,54 @@ export class ArticleComponent implements OnInit, DoCheck {
     private authService: AuthService,
     private likedService: LikedService,
     private snackbar: MatSnackBar,
+    private titleService: Title,
+    private metaService: Meta,
   ) {
     this.getArticle();
   }
 
   ngOnInit() {
     this.getLiked();
+    this.getTitle();
   }
 
   ngDoCheck() {
     this.checkContributor();
   }
+
+  getTitle() {
+    this.route.paramMap.subscribe(params => {
+      this.articleService.getArticle(params.get('articleId')).subscribe(data => {
+        this.titleService.setTitle(`${data.title}-Men's-ClearLab`);
+        const meta = this.metaService;
+        data.content
+          ? meta.updateTag({
+            name: 'description',
+            content: data.content
+          })
+          : meta.removeTag("name='description'");
+
+        data.title
+          ? meta.updateTag({ property: 'og:title', content: data.title })
+          : meta.removeTag("property='og:title'");
+
+        data.content
+          ? meta.updateTag({
+            property: 'og:description',
+            content: data.content
+          })
+          : meta.removeTag("property='og:description'");
+
+        data.articleImageUrls[0]
+          ? meta.updateTag({
+            property: 'og:image',
+            content: data.articleImageUrls[0]
+          })
+          : meta.removeTag("property='og:image'");
+      });
+    });
+  }
+
 
 
 
