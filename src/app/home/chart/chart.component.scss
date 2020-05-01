@@ -1,0 +1,17 @@
+@import "mixins";
+@import "reset";
+
+.chart-wrapper {
+  margin: 0 auto 80px;
+  max-width: 1000px;
+  @include tab {
+    display: flex;
+    align-items: baseline;
+  }
+  @include pc {
+    margin: 0 auto 138px;
+  }
+  canvas {
+    max-width: 500px;
+  }
+}
