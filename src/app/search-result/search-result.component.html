@@ -1,0 +1,50 @@
+<div class="search-result">
+  <ais-instantsearch [config]="config">
+    <ais-configure [searchParameters]="resultParams"></ais-configure>
+    <h1 class="hdg">検索結果一覧</h1>
+    <!-- 検索結果 -->
+    <ais-hits>
+      <!-- hitsに結果が入ってくる -->
+      <ng-template let-hits="hits" let-results="results">
+        <!-- ヒット件数 -->
+        <ng-container *ngIf="hits.length === 0; else result">
+          条件に一致する記事は見つかりませんでした。
+        </ng-container>
+        <ng-template #result>
+          <ais-stats>
+            <ng-template let-state="state">
+              <div class="search-result__hit">
+                検索結果「{{ results.query }}」は{{ state.nbHits }}
+                件ヒットしました。
+              </div>
+            </ng-template>
+          </ais-stats>
+        </ng-template>
+        <div *ngIf="results.query && results.query.length > 0">
+          <ais-hits>
+            <ng-template let-hits="hits">
+              <div>
+                <div class="cards" *ngFor="let hit of hits">
+                  <mat-card routerLink="/article/{{ hit.articleId }}">
+                    <mat-card-header>
+                      <mat-card-title>{{hit.title}}</mat-card-title>
+                    </mat-card-header>
+                    <ng-container *ngIf="hit.articleImageUrls; else defaultImage">
+                      <figure mat-card-image [style.background-image]="'url(' + hit.articleImageUrls[0] + ')'"></figure>
+                    </ng-container>
+                    <ng-template #defaultImage>
+                      <figure mat-card-image class="defaultImage"></figure>
+                    </ng-template>
+                    <mat-card-footer>
+                      <p>いいね{{ hit.liked }}❤️</p>
+                    </mat-card-footer>
+                  </mat-card>
+                </div>
+              </div>
+            </ng-template>
+          </ais-hits>
+        </div>
+      </ng-template>
+    </ais-hits>
+  </ais-instantsearch>
+</div>
