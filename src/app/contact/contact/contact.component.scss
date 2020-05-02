@@ -1,0 +1,23 @@
+@import "mixins";
+@import "reset";
+
+.contact {
+  margin-top: 40px;
+  padding: 0 8px;
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+  p {
+    max-width: 500px;
+    margin: 0 auto 24px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+  }
+}
