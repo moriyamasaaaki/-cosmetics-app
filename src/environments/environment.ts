@@ -1,3 +1,4 @@
+import * as algoliasearch from 'algoliasearch/lite';
 
 export const environment = {
   production: false,
@@ -12,4 +13,10 @@ export const environment = {
     measurementId: 'G-QNXDHMKDVB'
   }
 };
+
+export const searchClient = algoliasearch(
+  'QHQKMOPZAA',
+  'ee88b7914f35c3589652b3af76530549'
+);
+
 
