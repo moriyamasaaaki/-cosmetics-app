@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -29,6 +30,12 @@ import { DialogComponent } from './dialog/dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SearchComponent } from './search/search.component';
+
+import { NgAisModule, NgAisInstantSearchModule } from 'angular-instantsearch';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SearchInputComponent } from './search-input/search-input.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +43,9 @@ import { MatInputModule } from '@angular/material/input';
     HeaderComponent,
     FooterComponent,
     DialogComponent,
+    SearchComponent,
+    SearchInputComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     SharedModule,
     MatMenuModule,
+    MatCardModule,
     MatButtonModule,
     MatSnackBarModule,
     MatTooltipModule,
@@ -59,8 +70,12 @@ import { MatInputModule } from '@angular/material/input';
     AngularFirestoreModule,
     AngularFireFunctionsModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgAisModule.forRoot(),
+    MatAutocompleteModule,
+    NgAisInstantSearchModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: REGION, useValue: 'asia-northeast1' }
   ],
