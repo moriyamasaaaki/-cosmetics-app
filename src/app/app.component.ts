@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,14 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  user$ = this.authService.afUser$;
 
   constructor(
     private titleService: Title,
     private metaService: Meta,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {

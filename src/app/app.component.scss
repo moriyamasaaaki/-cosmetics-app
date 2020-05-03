@@ -7,5 +7,17 @@
   min-height: 100%;
 }
 .content {
+  position: relative;
   flex: 1;
+  margin-top: 8rem;
+  @include tab {
+    margin-top: 4rem;
+  }
 }
+
+  .add-icon {
+    position: fixed;
+    bottom: 4%;
+    right: 4%;
+    z-index: 999;
+  }

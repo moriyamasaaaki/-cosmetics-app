@@ -1,6 +1,9 @@
 <div class="container">
   <app-header></app-header>
   <main class="content">
+    <button mat-fab color="accent" class="add-icon" aria-label="記事作成" matTooltip="記事作成" routerLink="/form" *ngIf="user$ | async">
+      <mat-icon>add</mat-icon>
+    </button>
   <router-outlet></router-outlet>
   </main>
   <app-footer></app-footer>
