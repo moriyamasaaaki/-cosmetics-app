@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { FormGuard } from './guards/form.guard';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 const routes: Routes = [
@@ -62,8 +62,10 @@ const routes: Routes = [
     },
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
   },
-
-
+  {
+    path: 'search',
+    component: SearchResultComponent
+  },
 ];
 
 @NgModule({

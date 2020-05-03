@@ -4,6 +4,8 @@
 
 .header {
   background-color: #fff;
+  display: block;
+  align-items: baseline;
   @include mat-elevation(2);
   &__spacer {
     flex: 1 1 auto;
@@ -26,6 +28,26 @@
   }
   &__search {
     display: none;
+  }
+  &__mobile {
+    width: 100%;
+    display: block;
+    @include tab {
+      display: none;
+    }
+  }
+  &__pc {
+    display: none;
+    width: 80%;
+    @include tab {
+      display: block;
+    }
+  }
+  &__first-row {
+    margin-bottom: 16px;
+    @include tab {
+      margin-bottom: 0;
+    }
   }
 }
 
