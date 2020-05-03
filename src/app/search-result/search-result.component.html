@@ -23,9 +23,8 @@
         <div *ngIf="results.query && results.query.length > 0">
           <ais-hits>
             <ng-template let-hits="hits">
-              <div>
-                <div class="cards" *ngFor="let hit of hits">
-                  <mat-card routerLink="/article/{{ hit.articleId }}">
+                <div class="card">
+                  <mat-card routerLink="/article/{{ hit.articleId }}" *ngFor="let hit of hits">
                     <mat-card-header>
                       <mat-card-title>{{hit.title}}</mat-card-title>
                     </mat-card-header>
@@ -40,7 +39,6 @@
                     </mat-card-footer>
                   </mat-card>
                 </div>
-              </div>
             </ng-template>
           </ais-hits>
         </div>
