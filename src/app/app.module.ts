@@ -36,6 +36,7 @@ import { NgAisModule, NgAisInstantSearchModule } from 'angular-instantsearch';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
     SearchComponent,
     SearchInputComponent,
     SearchResultComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

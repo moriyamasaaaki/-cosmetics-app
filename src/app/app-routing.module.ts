@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchResultComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   },
 ];
 
