@@ -1,0 +1,22 @@
+@import "mixins";
+@import "reset";
+
+.not-found {
+  text-align: center;
+  &__title {
+    font-weight: 600;
+    font-size: 32px;
+    margin: 40px 0;
+    @include pc {
+      font-size: 56px;
+      margin: 64px 0;
+    }
+  }
+  p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    @include pc {
+      font-size: 24px;
+    }
+  }
+}
